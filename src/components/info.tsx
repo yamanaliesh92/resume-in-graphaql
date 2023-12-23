@@ -35,7 +35,7 @@ export default function Info({ data }: IProps) {
         <h1 className=" mt-2 text-2xl">{data?.getUser.username}yaman</h1>
       </div>
       <div className="p-5 overflow-auto">
-        <div className="mt-2 rounded-full text-2xl text-white flex items-center justify-center text-center p-5 h-[40px] bg-gray-800 uppercase ">
+        <div className="mt-2 rounded-full text-2xl sm:text-[18px] text-white flex items-center justify-center text-center p-5 h-[40px] bg-gray-800 uppercase ">
           contact me
         </div>
         <Contact data={data} />
@@ -43,19 +43,13 @@ export default function Info({ data }: IProps) {
 
       <div className="p-5 overflow-auto">
         <div className="mt-2 rounded-full text-2xl text-white flex items-center justify-center text-center p-5 h-[40px] bg-gray-800 uppercase ">
-          contact me
+          languages
         </div>
         {data &&
           data?.getUser.languages.map((item) => (
             <Language dataLanguage={item} />
           ))}
       </div>
-
-      {open && (
-        <div className="w-[500px] h-[250px] bg-purple-600 flex items-center justify-center p-2 z-30 relative top-4 ">
-          <CreateCategory closeModal={setOpen} />
-        </div>
-      )}
     </div>
   );
 }

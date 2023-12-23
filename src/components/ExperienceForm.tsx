@@ -17,7 +17,7 @@ const createExperience = gql`
 `;
 
 const ExperienceForm: FC<IProps> = ({ setOpen }) => {
-  const [mutation, { data, loading, error }] = useMutation(createExperience);
+  const [mutation, { loading, error }] = useMutation(createExperience);
   const [element, setElement] = useState({ experience: "", year: 0 });
   const [click, setClick] = useState(false);
   const navigate = useRouter();
@@ -50,15 +50,14 @@ const ExperienceForm: FC<IProps> = ({ setOpen }) => {
     });
   };
 
-  console.log("error", error);
-
   return (
-    <div className="w-[500px] h-fit p-2 bg-white">
+    <div className="w-[300px] sm:w-[500px] h-fit p-2 bg-white">
       <h2 className="font-bold text-2xl text-center text-[#184191]">
         Experience
       </h2>
       <form onSubmit={submit} className="w-full p-2 h-full flex flex-col ">
         {error && <h1>er{error.message}</h1>}
+        {loading && <h1>loading....</h1>}
         {click && <h1>now can add more Experience</h1>}
 
         <div className="flex flex-col w-full">

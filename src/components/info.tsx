@@ -32,7 +32,7 @@ export default function Info({ data }: IProps) {
             alt="ss"
           />
         </div>
-        <h1 className=" mt-2 text-2xl">{data?.getUser.username}</h1>
+        <h1 className=" mt-2 text-2xl">{data?.getUser.username}yaman</h1>
       </div>
       <div className="p-5 overflow-auto">
         <div className="mt-2 rounded-full text-2xl text-white flex items-center justify-center text-center p-5 h-[40px] bg-gray-800 uppercase ">

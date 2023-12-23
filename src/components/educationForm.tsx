@@ -16,7 +16,7 @@ const Cre = gql`
 `;
 
 const EductionForm: FC<IProps> = ({ setOpen }) => {
-  const [mutation, { data, loading, error }] = useMutation(Cre);
+  const [mutation, { loading, error }] = useMutation(Cre);
   const [element, setElement] = useState({
     university: "",
     title: "",
@@ -56,7 +56,7 @@ const EductionForm: FC<IProps> = ({ setOpen }) => {
   console.log("error", error);
 
   return (
-    <div className="w-[500px] h-fit p-2 bg-white">
+    <div className="w-[300px] sm:w-[500px] h-fit p-2 bg-white">
       <h2
         data-cy="title"
         className="font-bold text-2xl text-center text-[#184191]"
@@ -64,6 +64,7 @@ const EductionForm: FC<IProps> = ({ setOpen }) => {
         Education
       </h2>
       <form onSubmit={submit} className="w-full p-2 h-full flex flex-col ">
+        {loading && <h1>loading...</h1>}
         {error && <h1 className="text-red-400 text-center">{error.message}</h1>}
         {click && (
           <h1 className="text-gray-400 mt-2 text-center">

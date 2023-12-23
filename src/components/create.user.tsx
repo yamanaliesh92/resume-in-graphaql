@@ -10,9 +10,9 @@ interface IProps {
 
 interface IPayloadCreateUser {
   email: string;
-  password: string;
+  linkedIn: string;
   username: string;
-  phoneNumber: number;
+  phoneNumber: string;
   location: string;
   about: string;
 }
@@ -21,19 +21,19 @@ const init = {
   email: "",
   about: "",
   username: "",
-  password: "",
+  linkedIn: "",
   location: "",
-  phoneNumber: 0,
+  phoneNumber: "xxx",
 };
 
 const Create = gql`
   mutation createSS(
     $username: String!
-    $phoneNumber: Int!
+    $phoneNumber: String!
     $about: String!
     $location: String!
     $email: String!
-    $password: String!
+    $linkedIn: String!
   ) {
     createUser(
       createUserInput: {
@@ -42,7 +42,7 @@ const Create = gql`
         about: $about
         username: $username
         email: $email
-        password: $password
+        linkedIn: $linkedIn
       }
     )
   }
@@ -55,9 +55,8 @@ const CreateUser: FC<IProps> = ({ setOpen }) => {
 
   const ocn = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) {
-      return "ss";
+      return "";
     }
-    // Create file reader object\
 
     const data = new FileReader();
     data.addEventListener("load", () => {
@@ -75,11 +74,10 @@ const CreateUser: FC<IProps> = ({ setOpen }) => {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    // localStorage.setItem("img", JSON.stringify({ file }));
     const data = await mutation({
       variables: {
         email: element.email,
-        password: element.password,
+        linkedIn: element.linkedIn,
         username: element.username,
         location: element.location,
         phoneNumber: element.phoneNumber,
@@ -94,7 +92,7 @@ const CreateUser: FC<IProps> = ({ setOpen }) => {
   };
 
   return (
-    <div className="w-[500px] h-[600px] p-2 bg-white">
+    <div className="w-[300px] sm:w-[500px] h-[600px] p-2 bg-white">
       <h2
         data-cy="title"
         className="font-bold text-2xl text-center text-[#184191]"
@@ -128,12 +126,12 @@ const CreateUser: FC<IProps> = ({ setOpen }) => {
 
           <input
             className="p-2 mt-8 text-[15px]  rounded-xl focus:outline-none border-b-2 rounded-b-none border-b-gray-400 w-45% sm:w-full"
-            value={element.password}
-            placeholder="enter your password"
+            value={element.linkedIn}
+            placeholder="enter your linkedIn"
             type={"password"}
             required
             onChange={(e) =>
-              setElement((prev) => ({ ...prev, password: e.target.value }))
+              setElement((prev) => ({ ...prev, linkedIn: e.target.value }))
             }
           />
         </div>
@@ -152,14 +150,13 @@ const CreateUser: FC<IProps> = ({ setOpen }) => {
           <input
             className="p-2 mt-8 text-[15px]  rounded-xl rounded-b-none focus:outline-none border-b-2 border-b-gray-400 w-45% sm:w-full"
             value={element.phoneNumber}
-            type={"number"}
+            type={"text"}
             required
-            min={1}
             placeholder="enter your phone number"
             onChange={(e) =>
               setElement((prev) => ({
                 ...prev,
-                phoneNumber: e.target.valueAsNumber,
+                phoneNumber: e.target.value,
               }))
             }
           />
@@ -178,13 +175,15 @@ const CreateUser: FC<IProps> = ({ setOpen }) => {
             setElement((prev) => ({ ...prev, about: e.target.value }))
           }
         />
-
-        <GrGallery
-          className="my-2"
-          cursor={"pointer"}
-          size={20}
-          onClick={() => ref.current?.click()}
-        />
+        <div className="flex items-center my-2">
+          <GrGallery
+            className="mr-2"
+            cursor={"pointer"}
+            size={20}
+            onClick={() => ref.current?.click()}
+          />
+          <h1>photo</h1>
+        </div>
 
         <button
           data-cy="submit"

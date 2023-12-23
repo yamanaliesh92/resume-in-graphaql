@@ -49,9 +49,10 @@ export interface ExperienceResponse {
 interface user {
   email: string;
   username: string;
-  phoneNumber: number;
+  phoneNumber: string;
   about: string;
   location: string;
+  linkedIn: string;
   eductions: EducationResponse[];
   languages: LanguageResponse[];
   experiences: ExperienceResponse[];
@@ -62,9 +63,8 @@ export interface getUser {
 }
 
 const HomeComponent = () => {
-  const { data } = useQuery<getUser>(Get);
+  const { data, loading } = useQuery<getUser>(Get);
   const pdfRef = useRef<HTMLDivElement>(null);
-  console.log("dataddddd", data);
 
   const print = useReactToPrint({
     content: () => pdfRef.current,
@@ -73,18 +73,22 @@ const HomeComponent = () => {
 
   return (
     <>
+      {loading && <h1> loading.... </h1>}
       <button
         className="b w-fit h-fit ml-10 rounded-full p-3 my-2 bg-blue-600 text-white cursor-pointer "
         onClick={print}
       >
         Downland as pdf
       </button>
-      <div ref={pdfRef} className="flex items-center p-4">
-        <div className="w-[42%] h-screen p-2">
+      <div
+        ref={pdfRef}
+        className="flex w-full flex-col sm:flex-row sm:items-center p-4"
+      >
+        <div className="w-full sm:w-[250px]   h-fit p-2">
           <Info data={data} />
         </div>
 
-        <div className="w-[78%]  h-screen p-2 ">
+        <div className="w-full sm:w-[78%]  h-fit p-2 ">
           <Side data={data} />
         </div>
       </div>

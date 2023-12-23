@@ -10,8 +10,6 @@ interface IProps {
   data: getUser | undefined;
 }
 export default function Side({ data }: IProps) {
-  console.log("data", data?.getUser.about);
-
   return (
     <div className="flex p-2 flex-col  bg-white">
       <div className="p-5 overflow-auto h-[220px]">

@@ -1,6 +1,6 @@
 "use client";
 import { gql, useQuery } from "@apollo/client";
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Info from "./info";
 import { useReactToPrint } from "react-to-print";
 import Side from "./side";

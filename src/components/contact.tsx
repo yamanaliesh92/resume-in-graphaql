@@ -31,13 +31,9 @@ export default function Contact({ data }: IProps) {
       <div className="flex items-center mt-2 ml-4 p-2">
         <AiFillLinkedin size={20} />
 
-        <Link
-          href="https://google.com"
-          // rel="noopener noreferrer"
-          target="_blank"
-        >
+        <a href={data?.getUser.linkedIn} target="_blank">
           {data?.getUser.linkedIn}
-        </Link>
+        </a>
       </div>
     </div>
   );

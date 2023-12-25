@@ -13,7 +13,6 @@ export function middleware(request: NextRequest) {
   if (!isPublic && !token) {
     return NextResponse.redirect(new URL("/", request.nextUrl));
   }
-  // return NextResponse.redirect(new URL("/", request.url));
 }
 
 export const config = {
